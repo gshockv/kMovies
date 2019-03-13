@@ -3,8 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+def apiKeyProperties = new Properties()
+def apiKeyFile = rootProject.file("api_key.properties")
+def apiKey = ''
+if (apiKeyFile.exists()) {
+    apiKeyProperties.load(new FileInputStream(apiKeyFile))
+    apiKey = apiKeyProperties["api_key"]
+}
+
 android {
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "com.gshockv.kmovies"
         minSdkVersion 26
@@ -12,7 +21,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField('String', 'API_KEY', "\"$apiKey\"")
     }
+
     buildTypes {
         release {
             minifyEnabled false
