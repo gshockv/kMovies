@@ -1,7 +1,8 @@
-package com.gshockv.kmovies
+package com.gshockv.kmovies.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.gshockv.kmovies.R
 
 class MainActivity : AppCompatActivity() {
 

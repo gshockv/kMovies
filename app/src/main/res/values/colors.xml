@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#E5F6FA</color>
+    <color name="colorPrimaryDark">#E5F6FA</color>
+    <color name="colorAccent">#30C50C</color>
+
+    <color name="colorMoviesHeader">#292929</color>
+
+    <color name="surfaceBackgroundStartColor">#F3F3F3</color>
+    <color name="surfaceBackgroundEndColor">#F0F8F8</color>
 </resources>

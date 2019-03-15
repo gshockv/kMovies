@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">kMovies</string>
+    <string name="moviesListHeader">The Movies</string>
 </resources>

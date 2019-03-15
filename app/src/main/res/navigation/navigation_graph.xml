@@ -8,7 +8,7 @@
 
     <fragment
             android:id="@+id/moviesListFragment"
-            android:name="com.gshockv.kmovies.MoviesListFragment"
+            android:name="com.gshockv.kmovies.ui.movies.MoviesListFragment"
             android:label="fragment_movies_list"
             tools:layout="@layout/fragment_movies_list"/>
 
