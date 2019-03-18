@@ -1,6 +1,5 @@
 package com.gshockv.kmovies.ui.movies
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,7 +29,7 @@ class MoviesListFragment : Fragment() {
         val apiKey = BuildConfig.API_KEY
         Toast.makeText(context, "API_KEY: $apiKey", Toast.LENGTH_SHORT).show()
 
-        viewModel.loadMoviesList().observe(this, Observer {
+        viewModel.loadMoviesList().observe(viewLifecycleOwner, Observer {
             when (it) {
                 is MoviesListState.LoadingState -> showLoadingState()
                 is MoviesListState.ErrorState -> showErrorState()
