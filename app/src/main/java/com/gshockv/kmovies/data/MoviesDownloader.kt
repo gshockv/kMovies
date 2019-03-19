@@ -10,7 +10,7 @@ import com.gshockv.kmovies.data.model.MoviesResponse
 import java.io.IOException
 import javax.inject.Inject
 
-class MoviesDownloader {
+class MoviesDownloader : MoviesRepository {
     companion object {
         const val TAG = "MoviesDownloader"
     }
@@ -27,7 +27,7 @@ class MoviesDownloader {
     @Inject
     lateinit var moviesApi : MoviesDbApi
 
-    suspend fun discoverMovies() = safeApiCall(
+    override suspend fun discoverMovies() = safeApiCall(
         call = { callDiscoverMovies() },
         errorMessage = "Error Occurred"
     )

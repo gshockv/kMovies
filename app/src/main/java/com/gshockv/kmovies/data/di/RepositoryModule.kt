@@ -1,6 +1,7 @@
 package com.gshockv.kmovies.data.di
 
 import com.gshockv.kmovies.data.MoviesDownloader
+import com.gshockv.kmovies.data.MoviesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -11,7 +12,7 @@ object RepositoryModule {
     @JvmStatic
     @Reusable
     @Provides
-    fun provideMoviesRepository() : MoviesDownloader {
+    fun provideMoviesRepository() : MoviesRepository {
         return MoviesDownloader()
     }
 
