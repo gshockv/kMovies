@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gshockv.kmovies.BuildConfig
 import com.gshockv.kmovies.R
 import com.gshockv.kmovies.data.model.MoviesList
@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.fragment_movies_list.*
 
 class MoviesListFragment : Fragment() {
     private lateinit var viewModel : MoviesListViewModel
+
+    private val moviesAdapter = MoviesAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -27,10 +29,14 @@ class MoviesListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val apiKey = BuildConfig.API_KEY
-//        Toast.makeText(context, "API_KEY: $apiKey", Toast.LENGTH_SHORT).show()
+        setupRecyclerView()
 
-        viewModel.state.observe(viewLifecycleOwner, Observer {
+        swipeRefresh.setOnRefreshListener {
+            // TODO: Implement me...
+            swipeRefresh.isRefreshing = false
+        }
+
+        viewModel.uiState.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is MoviesUiState.LoadingState -> showLoadingState()
                 is MoviesUiState.ErrorState -> showErrorState()
@@ -41,17 +47,21 @@ class MoviesListFragment : Fragment() {
         viewModel.loadMoviesList()
     }
 
-    private fun showDataState(data: MoviesList) {
-        textViewStateIndicator.text = "Data Received"
+    private fun setupRecyclerView() {
+        recyclerViewMovies.layoutManager = LinearLayoutManager(context)
+        recyclerViewMovies.adapter = moviesAdapter
+    }
 
-        Toast.makeText(context, "Loaded ${data.movies.size} movies", Toast.LENGTH_SHORT).show()
+    private fun showDataState(data: MoviesList) {
+        moviesAdapter.updateData(data.movies)
+        swipeRefresh.isRefreshing = false
     }
 
     private fun showErrorState() {
-        textViewStateIndicator.text = "Some Errors"
+        swipeRefresh.isRefreshing = false
     }
 
     private fun showLoadingState() {
-        textViewStateIndicator.text = "Loading in progress..."
+        swipeRefresh.isRefreshing = true
     }
 }

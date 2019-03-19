@@ -1,5 +1,6 @@
 package com.gshockv.kmovies.ui.movies
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.gshockv.kmovies.data.MoviesRepository
 import com.gshockv.kmovies.data.api.ApiResult
@@ -13,19 +14,21 @@ class MoviesListViewModel : BaseViewModel() {
         const val TAG = "MoviesListViewModel"
     }
 
-    val state = MediatorLiveData<MoviesUiState>()
+    private val _state = MediatorLiveData<MoviesUiState>()
+    val uiState : LiveData<MoviesUiState>
+        get() = _state
 
     @Inject
     lateinit var moviesRepo : MoviesRepository
 
     fun loadMoviesList() {
-        state.postValue(MoviesUiState.LoadingState)
+        _state.postValue(MoviesUiState.LoadingState)
 
         launch {
             val result = moviesRepo.discoverMovies()
             when (result) {
-                is ApiResult.Success -> state.postValue(MoviesUiState.DataState(result.data))
-                is ApiResult.Error -> state.postValue(MoviesUiState.ErrorState(result.exception.message!!))
+                is ApiResult.Success -> _state.postValue(MoviesUiState.DataState(result.data))
+                is ApiResult.Error -> _state.postValue(MoviesUiState.ErrorState(result.exception.message!!))
             }
         }
     }

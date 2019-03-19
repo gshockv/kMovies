@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/movieCardHeight"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true">
+
+        <ImageView
+                android:id="@+id/imageViewPoster"
+                android:layout_width="@dimen/moviePosterWidth"
+                android:layout_height="0dip"
+                app:layout_constraintDimensionRatio="w,16:9"
+                android:src="@drawable/sample_movie_poster"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/movie_poster"/>
+        <TextView
+                android:text="@string/movie_title_placeholder"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewTitle"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewPoster"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:textSize="20sp"
+                android:maxLines="2"
+                android:layout_marginBottom="4dp"/>
+        <TextView
+                android:id="@+id/textViewReleased"
+                style="@style/TextAppearance.MaterialComponents.Headline2"
+                android:text="@string/release_date_placeholder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/textViewTitle"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                android:textColor="#336699"
+                android:textSize="16sp"
+                android:layout_marginBottom="5dp"/>
+        <TextView
+                android:id="@+id/textViewOverview"
+                android:text="@string/movie_decription_placeholder"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/textViewReleased"
+                app:layout_constraintEnd_toEndOf="@+id/textViewReleased"
+                android:layout_marginEnd="8dp"
+                android:maxLines="7"
+                android:ellipsize="end"
+                app:layout_constraintTop_toBottomOf="@+id/textViewReleased"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

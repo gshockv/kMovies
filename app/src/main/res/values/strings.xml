@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">kMovies</string>
     <string name="moviesListHeader">The Movies</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="movie_title_placeholder">Movie Title</string>
+    <string name="release_date_placeholder">Arp 12 2018</string>
+    <string name="movie_decription_placeholder">A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground fight clubs forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion. A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground fight clubs forming in every town</string>
 </resources>
