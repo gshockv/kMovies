@@ -1,10 +1,9 @@
 package com.gshockv.kmovies.ui.movies
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.MediatorLiveData
 import com.gshockv.kmovies.data.MoviesRepository
+import com.gshockv.kmovies.data.api.ApiResult
 import com.gshockv.kmovies.ui.BaseViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,22 +13,20 @@ class MoviesListViewModel : BaseViewModel() {
         const val TAG = "MoviesListViewModel"
     }
 
-    private val state = MutableLiveData<MoviesListState>()
+    val state = MediatorLiveData<MoviesUiState>()
 
     @Inject
     lateinit var moviesRepo : MoviesRepository
 
-    fun loadMoviesList(): MutableLiveData<MoviesListState> {
+    fun loadMoviesList() {
+        state.postValue(MoviesUiState.LoadingState)
+
         launch {
-            state.value = MoviesListState.LoadingState
-
-            delay(4_000)
-            val movies = moviesRepo.moviesList()
-
-            Log.d(TAG, "Movies count: ${movies.movies.size}")
-
-            state.value = MoviesListState.DataState(movies)
+            val result = moviesRepo.discoverMovies()
+            when (result) {
+                is ApiResult.Success -> state.postValue(MoviesUiState.DataState(result.data))
+                is ApiResult.Error -> state.postValue(MoviesUiState.ErrorState(result.exception.message!!))
+            }
         }
-        return state
     }
 }

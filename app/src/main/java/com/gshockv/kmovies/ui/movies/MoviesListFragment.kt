@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.gshockv.kmovies.BuildConfig
 import com.gshockv.kmovies.R
+import com.gshockv.kmovies.data.model.MoviesList
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 
 class MoviesListFragment : Fragment() {
@@ -27,19 +28,23 @@ class MoviesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val apiKey = BuildConfig.API_KEY
-        Toast.makeText(context, "API_KEY: $apiKey", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, "API_KEY: $apiKey", Toast.LENGTH_SHORT).show()
 
-        viewModel.loadMoviesList().observe(viewLifecycleOwner, Observer {
+        viewModel.state.observe(viewLifecycleOwner, Observer {
             when (it) {
-                is MoviesListState.LoadingState -> showLoadingState()
-                is MoviesListState.ErrorState -> showErrorState()
-                is MoviesListState.DataState -> showDataState()
+                is MoviesUiState.LoadingState -> showLoadingState()
+                is MoviesUiState.ErrorState -> showErrorState()
+                is MoviesUiState.DataState -> showDataState(it.data)
             }
         })
+
+        viewModel.loadMoviesList()
     }
 
-    private fun showDataState() {
+    private fun showDataState(data: MoviesList) {
         textViewStateIndicator.text = "Data Received"
+
+        Toast.makeText(context, "Loaded ${data.movies.size} movies", Toast.LENGTH_SHORT).show()
     }
 
     private fun showErrorState() {
