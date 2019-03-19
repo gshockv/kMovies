@@ -1,4 +1,4 @@
-package com.gshockv.kmovies.ui
+package com.gshockv.kmovies.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

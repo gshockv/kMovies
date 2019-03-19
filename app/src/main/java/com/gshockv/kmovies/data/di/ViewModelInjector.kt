@@ -1,6 +1,6 @@
 package com.gshockv.kmovies.data.di
 
-import com.gshockv.kmovies.ui.movies.MoviesListViewModel
+import com.gshockv.kmovies.presentation.movies.MoviesListViewModel
 import dagger.Component
 import javax.inject.Singleton
 

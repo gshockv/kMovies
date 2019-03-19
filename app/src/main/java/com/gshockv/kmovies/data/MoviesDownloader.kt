@@ -6,13 +6,13 @@ import com.gshockv.kmovies.data.api.MoviesDbApi
 import com.gshockv.kmovies.data.di.DaggerRepositoryInjector
 import com.gshockv.kmovies.data.di.NetworkModule
 import com.gshockv.kmovies.data.di.RepositoryInjector
-import com.gshockv.kmovies.data.model.MoviesList
+import com.gshockv.kmovies.data.model.MoviesResponse
 import java.io.IOException
 import javax.inject.Inject
 
-class MoviesRepository {
+class MoviesDownloader {
     companion object {
-        const val TAG = "MoviesRepository"
+        const val TAG = "MoviesDownloader"
     }
 
     private val injector: RepositoryInjector = DaggerRepositoryInjector
@@ -32,7 +32,7 @@ class MoviesRepository {
         errorMessage = "Error Occurred"
     )
 
-    private suspend fun callDiscoverMovies() : ApiResult<MoviesList> {
+    private suspend fun callDiscoverMovies() : ApiResult<MoviesResponse> {
         val response = moviesApi.discoverMovies().await()
         if (response.isSuccessful) {
             Log.d(TAG, "Response: ${response.body().toString()}")

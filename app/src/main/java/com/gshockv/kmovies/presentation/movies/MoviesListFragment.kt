@@ -1,4 +1,4 @@
-package com.gshockv.kmovies.ui.movies
+package com.gshockv.kmovies.presentation.movies
 
 import android.content.Context
 import android.os.Bundle
@@ -9,9 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.gshockv.kmovies.BuildConfig
 import com.gshockv.kmovies.R
-import com.gshockv.kmovies.data.model.MoviesList
+import com.gshockv.kmovies.data.model.MoviesResponse
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 
 class MoviesListFragment : Fragment() {
@@ -52,7 +51,7 @@ class MoviesListFragment : Fragment() {
         recyclerViewMovies.adapter = moviesAdapter
     }
 
-    private fun showDataState(data: MoviesList) {
+    private fun showDataState(data: MoviesResponse) {
         moviesAdapter.updateData(data.movies)
         swipeRefresh.isRefreshing = false
     }

@@ -1,10 +1,10 @@
-package com.gshockv.kmovies.ui
+package com.gshockv.kmovies.presentation
 
 import androidx.lifecycle.ViewModel
 import com.gshockv.kmovies.data.di.DaggerViewModelInjector
 import com.gshockv.kmovies.data.di.RepositoryModule
 import com.gshockv.kmovies.data.di.ViewModelInjector
-import com.gshockv.kmovies.ui.movies.MoviesListViewModel
+import com.gshockv.kmovies.presentation.movies.MoviesListViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

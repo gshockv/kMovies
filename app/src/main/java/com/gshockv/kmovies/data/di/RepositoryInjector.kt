@@ -1,6 +1,6 @@
 package com.gshockv.kmovies.data.di
 
-import com.gshockv.kmovies.data.MoviesRepository
+import com.gshockv.kmovies.data.MoviesDownloader
 import dagger.Component
 import javax.inject.Singleton
 
@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Component(modules = [NetworkModule::class])
 interface RepositoryInjector {
 
-    fun inject(moviesRepository: MoviesRepository)
+    fun inject(moviesRepository: MoviesDownloader)
 
     @Component.Builder
     interface Builder {

@@ -1,4 +1,4 @@
-package com.gshockv.kmovies.ui.movies
+package com.gshockv.kmovies.presentation.movies
 
 import android.view.LayoutInflater
 import android.view.View
