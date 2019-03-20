@@ -33,10 +33,14 @@ android {
     }
 }
 
+kapt {
+    generateStubs = true
+}
+
 dependencies {
     def nav_version = "2.0.0"
     def lifecycle_version = "2.0.0"
-    def dagger2_version = '2.20'
+    def dagger2_version = '2.21'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -71,7 +75,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
     implementation "com.google.dagger:dagger-android:$dagger2_version"
     implementation "com.google.dagger:dagger-android-support:$dagger2_version"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger2_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
 
     testImplementation 'junit:junit:4.12'
 

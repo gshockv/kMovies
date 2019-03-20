@@ -2,25 +2,22 @@ package com.gshockv.kmovies.presentation.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.gshockv.kmovies.data.MoviesDownloader
 import com.gshockv.kmovies.data.MoviesRepository
 import com.gshockv.kmovies.data.api.ApiResult
 import com.gshockv.kmovies.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MoviesListViewModel : BaseViewModel() {
+class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepository)
+    : BaseViewModel() {
 
     companion object {
-        const val TAG = "MoviesListViewModel"
+        const val TAG = "MoviesViewModel"
     }
 
     private val _state = MediatorLiveData<MoviesUiState>()
     val uiState : LiveData<MoviesUiState>
         get() = _state
-
-    @Inject
-    lateinit var moviesRepo : MoviesRepository
 
     fun loadMoviesList() {
         _state.postValue(MoviesUiState.LoadingState)

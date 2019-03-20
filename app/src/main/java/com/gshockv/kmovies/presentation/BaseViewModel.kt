@@ -1,10 +1,6 @@
 package com.gshockv.kmovies.presentation
 
 import androidx.lifecycle.ViewModel
-import com.gshockv.kmovies.data.di.DaggerViewModelInjector
-import com.gshockv.kmovies.data.di.RepositoryModule
-import com.gshockv.kmovies.data.di.ViewModelInjector
-import com.gshockv.kmovies.presentation.movies.MoviesListViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -16,20 +12,20 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
 
-    private val injector : ViewModelInjector = DaggerViewModelInjector
-        .builder()
-        .repositoryModule(RepositoryModule)
-        .build()
-
-    init {
-        injectDependencies()
-    }
-
-    private fun injectDependencies() {
-        when (this) {
-            is MoviesListViewModel -> injector.inject(this)
-        }
-    }
+//    private val injector : ViewModelInjector = DaggerViewModelInjector
+//        .builder()
+//        .repositoryModule(RepositoryModule)
+//        .build()
+//
+//    init {
+//        injectDependencies()
+//    }
+//
+//    private fun injectDependencies() {
+//        when (this) {
+//            is MoviesViewModel -> injector.inject(this)
+//        }
+//    }
 
     override fun onCleared() {
         super.onCleared()

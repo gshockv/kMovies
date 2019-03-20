@@ -7,20 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gshockv.kmovies.R
 import com.gshockv.kmovies.data.model.MoviesResponse
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_movies_list.*
+import javax.inject.Inject
 
-class MoviesListFragment : Fragment() {
-    private lateinit var viewModel : MoviesListViewModel
+class MoviesFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel : MoviesViewModel
 
     private val moviesAdapter = MoviesAdapter()
 
     override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
         super.onAttach(context)
-        viewModel = ViewModelProviders.of(this).get(MoviesListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MoviesViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

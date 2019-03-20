@@ -3,29 +3,15 @@ package com.gshockv.kmovies.data
 import android.util.Log
 import com.gshockv.kmovies.data.api.ApiResult
 import com.gshockv.kmovies.data.api.MoviesDbApi
-import com.gshockv.kmovies.data.di.DaggerRepositoryInjector
-import com.gshockv.kmovies.data.di.NetworkModule
-import com.gshockv.kmovies.data.di.RepositoryInjector
 import com.gshockv.kmovies.data.model.MoviesResponse
 import java.io.IOException
 import javax.inject.Inject
 
-class MoviesDownloader : MoviesRepository {
+class MoviesDownloader @Inject constructor(private val moviesApi: MoviesDbApi) : MoviesRepository {
+
     companion object {
         const val TAG = "MoviesDownloader"
     }
-
-    private val injector: RepositoryInjector = DaggerRepositoryInjector
-        .builder()
-        .networkModule(NetworkModule)
-        .build()
-
-    init {
-        injector.inject(this)
-    }
-
-    @Inject
-    lateinit var moviesApi : MoviesDbApi
 
     override suspend fun discoverMovies() = safeApiCall(
         call = { callDiscoverMovies() },
