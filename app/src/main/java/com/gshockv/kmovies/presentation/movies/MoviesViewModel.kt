@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.gshockv.kmovies.data.MoviesRepository
 import com.gshockv.kmovies.data.api.ApiResult
+import com.gshockv.kmovies.data.domain.DiscoverMoviesUseCase
 import com.gshockv.kmovies.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesRepository)
+class MoviesViewModel @Inject constructor(private val discoverUseCase: DiscoverMoviesUseCase)
     : BaseViewModel() {
 
     companion object {
@@ -23,7 +24,7 @@ class MoviesViewModel @Inject constructor(private val moviesRepo: MoviesReposito
         _state.postValue(MoviesUiState.LoadingState)
 
         launch {
-            val result = moviesRepo.discoverMovies()
+            val result = discoverUseCase.discoverMovies()
             when (result) {
                 is ApiResult.Success -> _state.postValue(MoviesUiState.DataState(result.data))
                 is ApiResult.Error -> _state.postValue(MoviesUiState.ErrorState(result.exception.message!!))

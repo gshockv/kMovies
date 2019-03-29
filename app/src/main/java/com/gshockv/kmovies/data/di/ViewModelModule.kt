@@ -15,10 +15,8 @@ internal annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 @Module
 abstract class ViewModelModule {
-
     @Binds
     @IntoMap
     @ViewModelKey(MoviesViewModel::class)
     abstract fun bindMoviesListViewModel(viewModel: MoviesViewModel) : ViewModel
-
 }
