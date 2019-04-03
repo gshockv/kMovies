@@ -1,8 +1,7 @@
 package com.gshockv.kmovies.data.domain
 
-import com.gshockv.kmovies.data.api.ApiResult
-import com.gshockv.kmovies.data.model.MoviesResponse
+import com.gshockv.kmovies.presentation.movies.MoviesViewState
 
 interface DiscoverMoviesUseCase {
-    suspend fun discoverMovies() : ApiResult<MoviesResponse>
+    suspend fun discoverMovies() : MoviesViewState
 }

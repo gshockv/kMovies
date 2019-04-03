@@ -15,16 +15,16 @@ class MoviesDownloader @Inject constructor(private val moviesApi: MoviesDbApi) :
 
     override suspend fun discoverMovies() = safeApiCall(
         call = { callDiscoverMovies() },
-        errorMessage = "Error Occurred"
+        errorMessage = "Failure Occurred"
     )
 
-    private suspend fun callDiscoverMovies() : ApiResult<MoviesResponse> {
+        private suspend fun callDiscoverMovies() : ApiResult<MoviesResponse> {
         val response = moviesApi.discoverMovies().await()
         if (response.isSuccessful) {
             Log.d(TAG, "Response: ${response.body().toString()}")
             return ApiResult.Success(response.body()!!)
         }
-        return ApiResult.Error(IOException("Error occurred during fetching movies."))
+        return ApiResult.Failure(IOException("Failure occurred during fetching movies."))
     }
 
     private suspend fun <T : Any> safeApiCall(
@@ -33,6 +33,6 @@ class MoviesDownloader @Inject constructor(private val moviesApi: MoviesDbApi) :
     ): ApiResult<T> = try {
         call.invoke()
     } catch (ex: Exception) {
-        ApiResult.Error(IOException(errorMessage, ex))
+        ApiResult.Failure(IOException(errorMessage, ex))
     }
 }

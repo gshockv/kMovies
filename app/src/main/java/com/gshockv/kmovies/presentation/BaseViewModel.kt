@@ -10,7 +10,8 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
     private val job = Job()
 
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+        get() = job + Dispatchers.IO
+
 
 //    private val injector : ViewModelInjector = DaggerViewModelInjector
 //        .builder()

@@ -43,13 +43,13 @@ class MoviesFragment : Fragment() {
             swipeRefresh.isRefreshing = false
         }
 
-        viewModel.uiState.observe(viewLifecycleOwner, Observer {
+        viewModel.store.observe(viewLifecycleOwner) {
             when (it) {
-                is MoviesUiState.LoadingState -> showLoadingState()
-                is MoviesUiState.ErrorState -> showErrorState()
-                is MoviesUiState.DataState -> showDataState(it.data)
+                is MoviesViewState.LoadingState -> showLoadingState()
+                is MoviesViewState.ErrorState -> showErrorState()
+                is MoviesViewState.DataState -> showDataState(it.data)
             }
-        })
+        }
 
         viewModel.loadMoviesList()
     }
