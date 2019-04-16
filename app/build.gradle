@@ -31,6 +31,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
 }
 
 kapt {
@@ -78,7 +84,13 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "io.mockk:mockk:1.9.3"
+//    testCompile "org.hamcrest:hamcrest-all:"
 
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+//    testImplementation 'org.mockito:mockito-core:2.10.0'
+
+    testImplementation 'android.arch.core:core-testing:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0-alpha3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha03'
+
 }

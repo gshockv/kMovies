@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 
 class ViewStateStore<T : Any>(initialState: T) {
 
-    private val liveData = MutableLiveData<T>().apply {
+    val liveData = MutableLiveData<T>().apply {
         value = initialState
     }
 

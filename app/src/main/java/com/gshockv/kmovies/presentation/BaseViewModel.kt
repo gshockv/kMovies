@@ -1,32 +1,16 @@
 package com.gshockv.kmovies.presentation
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel : ViewModel(), CoroutineScope {
+abstract class BaseViewModel(dispatcher: CoroutineDispatcher) : ViewModel() {
+
     private val job = Job()
 
-    override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.IO
-
-
-//    private val injector : ViewModelInjector = DaggerViewModelInjector
-//        .builder()
-//        .repositoryModule(RepositoryModule)
-//        .build()
-//
-//    init {
-//        injectDependencies()
-//    }
-//
-//    private fun injectDependencies() {
-//        when (this) {
-//            is MoviesViewModel -> injector.inject(this)
-//        }
-//    }
+    val uiScope = CoroutineScope(dispatcher + job)
 
     override fun onCleared() {
         super.onCleared()
